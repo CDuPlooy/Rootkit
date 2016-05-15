@@ -11,6 +11,7 @@ xor esi,esi
 
 mov esi, msg
 call print
+int 0x11
 
 JMP $ ;; HANG
 
@@ -44,6 +45,7 @@ len_loop:
 len_done:
       ret
 ;;I forgot that the message for some reason needs to be down here. I Never really figured out why.
-msg db "Eros Rootkit" , 0xA , 0x10 , "Debug Version",0
+;;AAAAAAH CARRIAGE RETURNS!
+msg db "Eros Rootkit" , 0xA , 0xD , 0x10 , "Debug Version",0x11 ,0xA , 0xD ,0
  TIMES 510 - ($ - $$) db 0 ;;zero fills the remaining space
  DW 0xAA55 ;;Signature for the BIOS
