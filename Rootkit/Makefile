@@ -1,4 +1,4 @@
-compile:
+compile_raw:
 	nasm -f bin eros.asm -o eros.raw
-emulate: compile
-	bochs -f bochsConfig
+qemu: compile_raw
+	qemu-system-i386 -fda eros.raw -boot a
