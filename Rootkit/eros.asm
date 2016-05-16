@@ -82,7 +82,7 @@ checkDrive:
 msg db "Eros Rootkit" , 0xA , 0xD , 0x10 , "Debug Version",0x11 ,0xA , 0xD ,0
 errMsg db "An Error Occured",0xA,0xD,0
 succMsg db "Execution Normal",0xA,0xD,0
-hostDevice db "Host device checked - normal.",0xA,0xD
+hostDevice db "Host device checked - normal.",0xA,0xD ,0
 Drivenum dd 0
  TIMES 510 - ($ - $$) db 0 ;;zero fills the remaining space
  DW 0xAA55 ;;Signature for the BIOS
