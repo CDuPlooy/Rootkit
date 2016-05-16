@@ -3,6 +3,9 @@ ORG  0x7C00
 
 section .text
 
+;;On boot the drive being used's identifier is stored in dl.
+mov [Drivenum] ,dl
+
 xor eax,eax
 xor ebx,ebx
 xor ecx,ecx
@@ -13,6 +16,7 @@ mov esi, msg
 call print
 int 0x11
 
+call checkDrive
 
 call hang
 
@@ -57,10 +61,28 @@ len_loop:
       JMP len_loop
 len_done:
       ret
+
+checkDrive:
+        mov ah,0x01
+        mov dl,[Drivenum]
+        int 0x13
+        cmp ah,0
+        JE checkDrive_fine
+        JMP checkDrive_failed
+        checkDrive_failed:
+                call err
+                ret
+        checkDrive_fine:
+                mov esi,hostDevice
+                call print
+                ret
+
 ;;I forgot that the message for some reason needs to be down here. I Never really figured out why.
 ;;AAAAAAH CARRIAGE RETURNS!
 msg db "Eros Rootkit" , 0xA , 0xD , 0x10 , "Debug Version",0x11 ,0xA , 0xD ,0
 errMsg db "An Error Occured",0xA,0xD,0
 succMsg db "Execution Normal",0xA,0xD,0
+hostDevice db "Host device checked - normal.",0xA,0xD
+Drivenum dd 0
  TIMES 510 - ($ - $$) db 0 ;;zero fills the remaining space
  DW 0xAA55 ;;Signature for the BIOS
