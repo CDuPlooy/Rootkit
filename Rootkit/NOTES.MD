@@ -3,3 +3,4 @@
    <br />We need this to be able to convert an integer to a string.
 * Look at the FPU and functions using it. You'll need it.
 * Logarithm rules ; Fuckem right? Well you need them now. Study study study.
+* Study the NTFS , FAT and EXT filesystems. Need to read/write.
