@@ -5,11 +5,11 @@
 * Look at the FPU and functions using it. You'll need it.
 ```nasm
 dd number1: 0
-finit ;;resets FPU registers
-mov eax,dword num1 ;; Operating on dword [num1] results in a crash.
+finit                                                                   ;;resets FPU registers
+mov eax,dword num1                                       ;; Move pointers into registers first
 mov ebx,dword num2
-fld dword [eax] ;;loads 968 onto the fpu stack
-fld dword [ebx] ;;fyl2x now computes 1 * log2(968)
+fld dword [eax]                                                  ;;loads the value eax is point to
+fld dword [ebx]                                                  ;;fyl2x now computes y * log2(x)
 fyl2x
 ```
 * FPU needs a lot of memory ; Switch to 32 bit mode first.
