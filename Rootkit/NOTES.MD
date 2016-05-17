@@ -12,7 +12,6 @@ fld dword [eax]                                                  ;;loads the val
 fld dword [ebx]                                                  ;;fyl2x now computes y * log2(x)
 fyl2x
 ```
-* FPU needs a lot of memory ; Switch to 32 bit mode first.
 * Logarithm rules ; Fuckem right? Well you need them now. Study study study.
 * Study the NTFS , FAT and EXT filesystems. Need to read/write.
 
@@ -20,3 +19,9 @@ fyl2x
 * The bootloader now needs to be split into stages.
 * Stage one simply loads stage two from where we put the processor into protected        mode.
 * Once in protected mode normal execution can proceed. This is where we'll need to <br /> be able to read the different filesystems.
+
+
+# What I've Learned So Far:#
+* Assembly takes a lot of work.
+* The FPU doesn't need a lot of memory , it should work fine in 16 bit mode. ( Not 100% Sure But At Least A Tiny Bit Certain )
+
