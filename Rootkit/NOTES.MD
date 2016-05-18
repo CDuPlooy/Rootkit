@@ -24,4 +24,4 @@ fyl2x
 # What I've Learned So Far:#
 * Assembly takes a lot of work.
 * The FPU doesn't need a lot of memory , it should work fine in 16 bit mode. ( Not 100% Sure But At Least A Tiny Bit Certain )
-
+* BIOS functions uses the stack ( SUPRISE! ) so I should probably set it up first.

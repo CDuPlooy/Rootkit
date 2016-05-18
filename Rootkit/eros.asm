@@ -4,13 +4,37 @@ ORG  0x7C00
 section .text
 
 ;;On boot the drive being used's identifier is stored in dl.
+_stackCreation:
+        mov ax,0x0
+        add ax,512      ;;Size of stage 1
+        ;;add ax,598    ;;We'll have a stage 2 as well so uncomment this later
+        add ax,8092    ;;Disk buffer.
+        add ax,4092 ;;Stack
+
+        ;;set registers
+        mov ss,ax
+        mov sp,0
+
+        push 50
+        push 50
+        pop ebx
+        push 50
+        pop ebx
+        push 50
+        pop ebx
+        push 50
+        pop ebx
+        
+        pop ebx
+
+_stageOne:
 mov [Drivenum] ,dl
 
 xor eax,eax
 xor ebx,ebx
 xor ecx,ecx
 xor edx,edx
-xor esi,esi
+;xor esi,esi
 
 mov esi, msg
 call print
