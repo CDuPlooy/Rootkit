@@ -27,3 +27,5 @@ std::string numToString(int amount){
         return number;
 }
 ````
+
+This is for ASCII values. I doubt it'll work for UTF.
