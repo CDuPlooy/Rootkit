@@ -29,3 +29,4 @@ std::string numToString(int amount){
 ````
 
 This is for ASCII values. I doubt it'll work for UTF.
+Doesn't work for multiples of ten... :?
