@@ -2,7 +2,7 @@
 
 Definitely not an error on my part. I came across this after thinking for hours how to write something that proves that the BIOS does use the stack ( just in case your a paranoid chap who won't believe anything he reads on the web ).
 
-Consider the following code that sets up the stack ( line 1 is the problem ):
+Consider the following ( incomplete ) code that sets up the stack ( line 1 is the problem ):
 ```assembly
 _stackCreation:
         mov ax,0x7C00 ;;------> Changing this to xor eax,eax works. I'm not sure if it's defined to be that way though.
