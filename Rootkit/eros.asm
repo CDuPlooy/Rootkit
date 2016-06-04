@@ -12,20 +12,7 @@ _stackCreation:
         add ax,4092 ;;Stack
 
         ;;set registers
-        mov ss,ax
-        mov sp,0
-
-        push 50
-        push 50
-        pop ebx
-        push 50
-        pop ebx
-        push 50
-        pop ebx
-        push 50
-        pop ebx
-        
-        pop ebx
+        ;;fall through to stage 1
 
 _stageOne:
 mov [Drivenum] ,dl
