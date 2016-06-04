@@ -2,16 +2,18 @@ BITS 16
 ORG  0x7C00
 
 section .text
+xor ax, ax
+mov ds, ax
+mov es, ax  ;;xor es,es results in an error
+;;This needs to be done on account of segmentation.
 
 ;;On boot the drive being used's identifier is stored in dl.
 _stackCreation:
-        mov ax,0x0
         add ax,512      ;;Size of stage 1
         ;;add ax,598    ;;We'll have a stage 2 as well so uncomment this later
         add ax,8092    ;;Disk buffer.
         add ax,4092 ;;Stack
 
-        ;;set registers
         ;;fall through to stage 1
 
 _stageOne:
@@ -28,8 +30,46 @@ call print
 int 0x11
 
 call checkDrive
+;;int 13h is low level disk services ; ah = 02h read
+;;I'm on the right track 13h 02h isn't an extended function
+
+;;; COPIED FROM http://stackoverflow.com/questions/15497842/read-a-write-a-sector-from-hard-drive-with-int-13h
+; read_sectors_16
+;
+; Reads sectors from disk into memory using BIOS services
+;
+; input:    dl      = drive
+;           ch      = cylinder[7:0]
+;           cl[7:6] = cylinder[9:8]
+;           dh      = head
+;           cl[5:0] = sector (1-63)
+;           es:bx  -> destination
+;           al      = number of sectors
+;
+; output:   cf (0 = success, 1 = failure)
+mov ah,0x02
+mov dl,[Drivenum]
+xor dh,dh
+mov cl , 0  ;;cylinder 0
+mov ch, 2 ;;sector 2
+mov  bx, 0x7E00 ;;the starting point for
+mov al,1
+int 0x13
+jc load_sector_error
+jnc load_sector_succ
+
+load_sector_error:
+mov esi,errMsg
+call print
 
 call hang
+
+load_sector_succ:
+mov esi,succMsg
+call print
+
+call hang
+
 
 err:
 mov esi,errMsg
