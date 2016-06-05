@@ -50,13 +50,12 @@ call checkDrive
 mov ah,0x02
 mov dl,[Drivenum]
 xor dh,dh
-mov cl , 0  ;;cylinder 0
-mov ch, 2 ;;sector 2
+mov cl , 2 ;;cylinder 2
+mov ch, 0 ;;sector 0
 mov  bx, 0x7E00 ;;the starting point for
 mov al,1
 int 0x13
-jc load_sector_error
-jnc load_sector_succ
+jmp 0x7E00
 
 load_sector_error:
 mov esi,errMsg
@@ -130,10 +129,10 @@ checkDrive:
 
 ;;I forgot that the message for some reason needs to be down here. I Never really figured out why.
 ;;AAAAAAH CARRIAGE RETURNS!
-msg db "Eros Rootkit" , 0xA , 0xD , 0x10 , "Debug Version",0x11 ,0xA , 0xD ,0
-errMsg db "An Error Occured",0xA,0xD,0
-succMsg db "Execution Normal",0xA,0xD,0
-hostDevice db "Host device checked - working.",0xA,0xD ,0 ,0
-Drivenum dd 0
+msg: db "Eros Rootkit" , 0xA , 0xD , 0x10 , "Debug Version",0x11 ,0xA , 0xD ,0
+errMsg: db "An Error Occured",0xA,0xD,0
+succMsg: db "Execution Normal",0xA,0xD,0
+hostDevice: db "Host device checked - working.",0xA,0xD ,0 ,0
+Drivenum: dd 0
  TIMES 510 - ($ - $$) db 0 ;;zero fills the remaining space
  DW 0xAA55 ;;Signature for the BIOS
