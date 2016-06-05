@@ -4,9 +4,9 @@
 
 
 ## 1 - Compiling ( Hardware method ):
-* Compile with nasm -f raw input.asm -o output.raw
+* Compile with make
 * Check what device is your target drive with lsblk. Usually it is the last one.
-* sudo dd if=output.raw of=/dev/sdc bs=512 count=1
+* sudo dd if=eros_final.raw of=/dev/sdb bs=512
 
 
 The third step is the most important because we want the bootloader to be located at the<br />
