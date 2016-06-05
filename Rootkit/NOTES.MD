@@ -21,7 +21,11 @@ fyl2x
 * Once in protected mode normal execution can proceed. This is where we'll need to <br /> be able to read the different filesystems.
 
 
-# What I've Learned So Far:#
+## What I've Learned So Far:#
 * Assembly takes a lot of work.
 * The FPU doesn't need a lot of memory , it should work fine in 16 bit mode. ( Not 100% Sure But At Least A Tiny Bit Certain )
 * BIOS functions uses the stack ( SUPRISE! ) so I should probably set it up first.
+* The read BIOS call only loads 512 blocks at a time. meaning stage 2 shouldn't exceed 512 bytes. At least not yet.
+
+## Related Links
+* [uefi-example](http://forum.nasm.us/index.php?topic=2191.0)
